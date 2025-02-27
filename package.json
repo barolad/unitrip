@@ -1,0 +1,25 @@
+{
+  "name": "unitrip",
+  "private": true,
+  "scripts": {
+    "lint": "eslint",
+    "lint:fix": "eslint --fix",
+    "format": "prettier --check .",
+    "format:fix": "prettier --write .",
+    "server:dev": "bun run --hot apps/server/src/index.ts",
+    "web:dev": "bun run next dev ./apps/web"
+  },
+  "peerDependencies": {
+    "typescript": "^5.7.3"
+  },
+  "devDependencies": {
+    "@antfu/eslint-config": "^4.3.0",
+    "@types/bun": "latest",
+    "eslint": "^9.21.0",
+    "prettier": "^3.5.2"
+  },
+  "workspaces": [
+    "apps/*",
+    "packages/*"
+  ]
+}
