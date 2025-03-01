@@ -28,8 +28,12 @@ app.get(
   })
 );
 
-app.route('/events', eventsApi);
-app.route('/organizers', organizersApi);
+// eslint-disable-next-line unused-imports/no-unused-vars
+const routes = app.route('/events', eventsApi).route('/organizers', organizersApi);
+
+type AppType = typeof routes;
+
+export { type AppType }; 
 
 export default {
   port: 3000,

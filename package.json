@@ -2,8 +2,8 @@
   "name": "unitrip",
   "private": true,
   "scripts": {
-    "lint": "eslint",
-    "lint:fix": "eslint --fix",
+    "lint": "bunx eslint",
+    "lint:fix": "bunx eslint --fix",
     "format": "prettier --check .",
     "format:fix": "prettier --write .",
     "server:dev": "bun run --hot apps/server/src/index.ts",

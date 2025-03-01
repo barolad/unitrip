@@ -1,5 +1,4 @@
-import type { organizersApi } from '.';
-import { createRoute, z } from '@hono/zod-openapi';
+import { createRoute, OpenAPIHono, z } from '@hono/zod-openapi';
 import { db } from '@unitrip/db';
 import { organizer } from '@unitrip/db/src/schema';
 import { OrganizerSchema } from './schema';
@@ -21,12 +20,10 @@ const getAllRoute = createRoute({
   }
 });
 
-export function registerGetAllOrganizers(api: typeof organizersApi) {
-  return api.openapi(getAllRoute, async (c) => {
-    const _organizers = await db.select().from(organizer);
+export const getAllHandler = new OpenAPIHono().openapi(getAllRoute, async (c) => {
+  const _organizers = await db.select().from(organizer);
 
-    const organizers = OrganizerSchema.array().parse(_organizers);
+  const organizers = OrganizerSchema.array().parse(_organizers);
 
-    return c.json(organizers, 200);
-  });
-}
+  return c.json(organizers, 200);
+});

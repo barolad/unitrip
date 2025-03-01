@@ -1,8 +1,5 @@
 import { OpenAPIHono } from '@hono/zod-openapi';
-import { registerGetAllEvents } from './get-all';
-import { registerPostEvent } from './post';
+import { getAllHandler } from './get-all';
+import { postHandler } from './post';
 
-export const eventsApi = new OpenAPIHono();
-
-registerGetAllEvents(eventsApi);
-registerPostEvent(eventsApi);
+export const eventsApi = new OpenAPIHono().route('/', getAllHandler).route('/', postHandler);

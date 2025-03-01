@@ -1,5 +1,6 @@
 {
   "compilerOptions": {
+    "composite": true,
     "target": "ESNext",
     "jsx": "react-jsx",
     "jsxImportSource": "hono/jsx",
@@ -19,7 +20,8 @@
     "noPropertyAccessFromIndexSignature": false,
     "noUnusedLocals": false,
     "noUnusedParameters": false,
-    "noEmit": true,
+    "emitDeclarationOnly": true,
+    "noEmit": false,
     "verbatimModuleSyntax": true,
     "skipLibCheck": true
   }
