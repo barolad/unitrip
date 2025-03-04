@@ -4,6 +4,7 @@ export default antfu({
   stylistic: false,
   ignores: ['apps/web/src/routeTree.gen.ts'],
   rules: {
-    'node/prefer-global/process': 'off'
+    'node/prefer-global/process': 'off',
+    'unicorn/prefer-node-protocol': 'off'
   }
 });
