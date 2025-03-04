@@ -33,7 +33,7 @@ const routes = app.route('/events', eventsApi).route('/organizers', organizersAp
 
 type AppType = typeof routes;
 
-export { type AppType }; 
+export { type AppType };
 
 export default {
   port: 3000,
