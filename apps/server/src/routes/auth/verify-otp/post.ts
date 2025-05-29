@@ -1,6 +1,8 @@
 import type { authApi } from "../";
 import { createRoute, z } from "@hono/zod-openapi";
-import { ERROR_MESSAGES, verifyOtp } from "../otp";
+import { setCookie } from "hono/cookie";
+import { ApiError } from "@/utils/errors";
+import { verifyOtp } from "../otp";
 import { generateTokens } from "./tokens";
 
 const verifyOtpSchema = z.object({
@@ -54,25 +56,32 @@ const verifyOtpRoute = createRoute({
   },
 });
 
-export const registerVerifyOtp = (api: typeof authApi) => {
+export function registerVerifyOtp(api: typeof authApi) {
   return api.openapi(verifyOtpRoute, async (c) => {
     const { email, code } = await c.req.json();
 
-    try {
       const isValid = await verifyOtp(email, code);
 
       if (!isValid) {
-        return c.json(
-          {
-            success: false,
-            message: "Неверный код подтверждения",
-          },
-          401,
-        );
+        throw new ApiError({
+          code: "UNAUTHORIZED",
+          message: "Неверный код подтверждения",
+        });
       }
 
       const { accessToken, refreshToken } = await generateTokens(email);
-
+      setCookie(c, "accessToken", accessToken, {
+        httpOnly: true,
+        secure: true,
+        sameSite: "strict",
+        maxAge: 60 * 60 * 24 * 30, // 30 дней
+      });
+      setCookie(c, "refreshToken", refreshToken, {
+        httpOnly: true,
+        secure: true,
+        sameSite: "strict",
+        maxAge: 60 * 60 * 24 * 30, // 30 дней
+      });
       return c.json({
         accessToken,
         refreshToken,
@@ -81,29 +90,5 @@ export const registerVerifyOtp = (api: typeof authApi) => {
           email,
         },
       });
-    } catch (error) {
-      if (error instanceof Error) {
-        if (error.message === ERROR_MESSAGES.MAX_ATTEMPTS_EXCEEDED) {
-          return c.json(
-            {
-              success: false,
-              message: error.message,
-            },
-            429,
-          );
-        }
-
-        if (error.message === ERROR_MESSAGES.OTP_EXPIRED) {
-          return c.json(
-            {
-              success: false,
-              message: error.message,
-            },
-            401,
-          );
-        }
-      }
-      throw error;
-    }
   });
-};
+}

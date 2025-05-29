@@ -1,13 +1,9 @@
 import { Redis } from "ioredis";
 import { env } from "@/env";
+import { ApiError } from "@/utils/errors";
 
 const OTP_EXPIRY = 5 * 60; // 5 минут
 const MAX_ATTEMPTS = 3; // Максимальное количество попыток
-
-export const ERROR_MESSAGES = {
-  MAX_ATTEMPTS_EXCEEDED: "Превышено максимальное количество попыток",
-  OTP_EXPIRED: "OTP код истек или не существует",
-} as const;
 
 const redis = new Redis(env.REDIS_URL);
 
@@ -41,12 +37,18 @@ export const verifyOtp = async (
 
   const attempts = await redis.incr(attemptsKey);
   if (attempts > MAX_ATTEMPTS) {
-    throw new Error(ERROR_MESSAGES.MAX_ATTEMPTS_EXCEEDED);
+    throw new ApiError({
+      code: "TOO_MANY_REQUESTS",
+      message: "Превышено максимальное количество попыток",
+    });
   }
 
   const storedOtp = await redis.get(otpKey);
   if (!storedOtp) {
-    throw new Error(ERROR_MESSAGES.OTP_EXPIRED);
+    throw new ApiError({
+      code: "UNAUTHORIZED",
+      message: "OTP код истек или не существует",
+    });
   }
 
   const isValid = storedOtp === code;

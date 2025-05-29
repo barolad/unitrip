@@ -12,7 +12,7 @@ const getRoute = createRoute({
   },
 });
 
-export const registerGetProfile = (api: typeof profileApi) => {
+export function registerGetProfile(api: typeof profileApi) {
   return api.openapi(getRoute, async (c) => {
     return c.json({
       id: "1",
