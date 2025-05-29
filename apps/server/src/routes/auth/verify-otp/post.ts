@@ -1,6 +1,6 @@
 import { createRoute, z } from "@hono/zod-openapi";
 import { authApi } from "../";
-import { verifyOtp } from "./otp";
+import { verifyOtp } from "../otp";
 import { generateTokens } from "./tokens";
 
 const verifyOtpSchema = z.object({
@@ -54,7 +54,6 @@ export const registerVerifyOtp = (api: typeof authApi) => {
     const { email, code } = await c.req.json();
     
     try {
-      // Проверяем OTP код
       const isValid = await verifyOtp(email, code);
       
       if (!isValid) {
@@ -64,7 +63,6 @@ export const registerVerifyOtp = (api: typeof authApi) => {
         }, 401);
       }
 
-      // Генерируем токены
       const { accessToken, refreshToken } = await generateTokens(email);
       
       return c.json({

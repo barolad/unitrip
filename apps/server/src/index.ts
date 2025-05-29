@@ -1,7 +1,7 @@
 import { cors } from "hono/cors";
-import { profileApi } from "@routes/profile";
 import { OpenAPIHono } from "@hono/zod-openapi";
-import { authApi } from "@routes/auth";
+import { authApi } from "@/routes/auth";
+import { profileApi } from "@/routes/profile";
 import { Scalar } from "@scalar/hono-api-reference";
 
 const app = new OpenAPIHono().basePath("/api");
@@ -30,9 +30,7 @@ app.doc("/openapi", {
 app.get(
   "/docs",
   Scalar({
-    spec: {
-      url: "/api/openapi",
-    },
+    url: "/api/openapi",
   }),
 );
 

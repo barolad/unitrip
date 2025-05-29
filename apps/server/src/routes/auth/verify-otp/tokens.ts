@@ -1,5 +1,5 @@
+import { env } from "@/env";
 import { sign, verify } from "jsonwebtoken";
-import { env } from "../../../config/env";
 
 const ACCESS_TOKEN_EXPIRY = "15m";
 const REFRESH_TOKEN_EXPIRY = "7d";

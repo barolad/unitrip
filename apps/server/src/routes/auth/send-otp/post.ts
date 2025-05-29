@@ -1,6 +1,6 @@
 import { createRoute, z } from "@hono/zod-openapi";
 import { authApi } from "../";
-import { generateAndStoreOtp, isOtpValid } from "./otp";
+import { generateAndStoreOtp, isOtpValid } from "../otp";
 
 const sendOtpSchema = z.object({
   email: z.string().email(),

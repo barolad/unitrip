@@ -5,7 +5,9 @@
     "jsxImportSource": "hono/jsx",
     "baseUrl": "./src",
     "paths": {
-      "@routes/*": ["./routes/*"]
-    }
+      "@/*": ["./*"]
+    },
+    "moduleResolution": "bundler",
+    "module": "ESNext"
   }
 }
