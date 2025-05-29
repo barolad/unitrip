@@ -3,8 +3,6 @@
     "target": "ESNext",
     "module": "ESNext",
     "lib": ["ESNext"],
-    "declaration": true,
-    "sourceMap": true,
     "moduleResolution": "bundler",
     "esModuleInterop": true,
     "resolveJsonModule": true,
@@ -15,6 +13,8 @@
     "strictBindCallApply": true,
     "strictPropertyInitialization": true,
     "rootDir": "./src",
+    "outDir": "./dist",
+    "declaration": true,
     "skipLibCheck": true,
     "forceConsistentCasingInFileNames": true,
     "isolatedModules": true

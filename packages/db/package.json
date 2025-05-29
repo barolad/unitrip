@@ -4,8 +4,7 @@
     "generate": "drizzle-kit generate",
     "push": "drizzle-kit push",
     "migrate": "bun src/migrate.mts",
-    "studio": "drizzle-kit studio",
-    "dev": "tsc --watch"
+    "studio": "drizzle-kit studio"
   },
   "main": "src/index.ts",
   "dependencies": {
