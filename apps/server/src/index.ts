@@ -3,6 +3,7 @@ import { OpenAPIHono } from "@hono/zod-openapi";
 import { authApi } from "@/routes/auth";
 import { profileApi } from "@/routes/profile";
 import { Scalar } from "@scalar/hono-api-reference";
+import { handleError, handleZodError } from "@/utils/errors";
 
 const app = new OpenAPIHono().basePath("/api");
 
@@ -10,6 +11,8 @@ const app = new OpenAPIHono().basePath("/api");
  * Uses
  */
 app.use("*", cors());
+
+app.onError(handleError);
 
 /**
  * Routes

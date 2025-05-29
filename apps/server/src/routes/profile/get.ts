@@ -19,5 +19,4 @@ export const registerGetProfile = (api: typeof profileApi) => {
       name: "John Doe",
     });
   });
-}
-
+};

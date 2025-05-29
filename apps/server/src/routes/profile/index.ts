@@ -1,6 +1,6 @@
-import { OpenAPIHono } from "@hono/zod-openapi";
+import { createApi } from "@/utils/api";
 import { registerGetProfile } from "./get";
 
-export const profileApi = new OpenAPIHono();
+export const profileApi = createApi();
 
 registerGetProfile(profileApi);

@@ -4,6 +4,11 @@ import { Redis } from "ioredis";
 const OTP_EXPIRY = 5 * 60; // 5 минут
 const MAX_ATTEMPTS = 3; // Максимальное количество попыток
 
+export const ERROR_MESSAGES = {
+  MAX_ATTEMPTS_EXCEEDED: "Превышено максимальное количество попыток",
+  OTP_EXPIRED: "OTP код истек или не существует",
+} as const;
+
 const redis = new Redis(env.REDIS_URL);
 
 const getOtpKey = (email: string) => `otp:${email}`;
@@ -27,27 +32,27 @@ export const generateAndStoreOtp = async (email: string): Promise<string> => {
   return otp;
 };
 
-export const verifyOtp = async (email: string, code: string): Promise<boolean> => {
+export const verifyOtp = async (
+  email: string,
+  code: string,
+): Promise<boolean> => {
   const otpKey = getOtpKey(email);
   const attemptsKey = getAttemptsKey(email);
 
   const attempts = await redis.incr(attemptsKey);
   if (attempts > MAX_ATTEMPTS) {
-    throw new Error("Превышено максимальное количество попыток");
+    throw new Error(ERROR_MESSAGES.MAX_ATTEMPTS_EXCEEDED);
   }
 
   const storedOtp = await redis.get(otpKey);
   if (!storedOtp) {
-    throw new Error("OTP код истек или не существует");
+    throw new Error(ERROR_MESSAGES.OTP_EXPIRED);
   }
 
   const isValid = storedOtp === code;
 
   if (isValid) {
-    await Promise.all([
-      redis.del(otpKey),
-      redis.del(attemptsKey),
-    ]);
+    await Promise.all([redis.del(otpKey), redis.del(attemptsKey)]);
   }
 
   return isValid;
@@ -56,4 +61,4 @@ export const verifyOtp = async (email: string, code: string): Promise<boolean> =
 export const isOtpValid = async (email: string): Promise<boolean> => {
   const otpKey = getOtpKey(email);
   return !!(await redis.get(otpKey));
-}; 
+};

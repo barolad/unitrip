@@ -3,7 +3,10 @@ import { authApi } from "../";
 import { generateAndStoreOtp, isOtpValid } from "../otp";
 
 const sendOtpSchema = z.object({
-  email: z.string().email(),
+  email: z.string().email().openapi({
+    description: "Email пользователя",
+    example: "test@example.com",
+  }),
 });
 
 const sendOtpRoute = createRoute({
@@ -46,20 +49,23 @@ export const registerSendOtp = (api: typeof authApi) => {
 
     const isValid = await isOtpValid(email);
     if (isValid) {
-      return c.json({
-        success: false,
-        message: "Код подтверждения уже отправлен. Подождите 5 минут.",
-      }, 429);
+      return c.json(
+        {
+          success: false,
+          message: "Код подтверждения уже отправлен. Подождите 5 минут.",
+        },
+        429,
+      );
     }
 
     const otp = await generateAndStoreOtp(email);
-    
+
     // Для дебага выводим код в консоль
     console.log(`OTP код для ${email}: ${otp}`);
-    
+
     return c.json({
       success: true,
       message: "Код подтверждения отправлен",
     });
   });
-}; 
+};
