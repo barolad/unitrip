@@ -1,9 +1,9 @@
-import { cors } from "hono/cors";
 import { OpenAPIHono } from "@hono/zod-openapi";
+import { Scalar } from "@scalar/hono-api-reference";
+import { cors } from "hono/cors";
 import { authApi } from "@/routes/auth";
 import { profileApi } from "@/routes/profile";
-import { Scalar } from "@scalar/hono-api-reference";
-import { handleError, handleZodError } from "@/utils/errors";
+import { handleError } from "@/utils/errors";
 
 const app = new OpenAPIHono().basePath("/api");
 

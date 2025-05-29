@@ -1,14 +1,12 @@
-import { Context } from "hono";
-import { ZodError } from "zod";
+import type { Context } from "hono";
 import { HTTPException } from "hono/http-exception";
-import { parseZodErrorIssues } from "./parseZodErrorIssues";
-import { statusToCode } from "../statusToCode";
+import { ZodError } from "zod";
+import { statusToCode } from "../lib/statusToCode";
 import { ApiError } from "../types/ApiError";
+import { parseZodErrorIssues } from "./parseZodErrorIssues";
 
 export function handleError(error: Error, c: Context) {
-  console.log("111");
   if (error instanceof ZodError) {
-    console.log("222");
     return c.json(
       {
         code: "BAD_REQUEST",

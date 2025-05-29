@@ -1,5 +1,5 @@
-import { ContentfulStatusCode } from "hono/utils/http-status";
-import { ErrorCode } from "../types/ErrorCode";
+import type { ContentfulStatusCode } from "hono/utils/http-status";
+import type { ErrorCode } from "../types/ErrorCode";
 
 export function codeToStatus(code: ErrorCode): ContentfulStatusCode {
   switch (code) {

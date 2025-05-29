@@ -1,5 +1,5 @@
-import { env } from "@/env";
 import { sign, verify } from "jsonwebtoken";
+import { env } from "@/env";
 
 const ACCESS_TOKEN_EXPIRY = "15m";
 const REFRESH_TOKEN_EXPIRY = "7d";
@@ -20,7 +20,7 @@ export const verifyToken = async (token: string) => {
   try {
     const decoded = verify(token, env.JWT_SECRET);
     return decoded as { email: string };
-  } catch (error) {
+  } catch {
     throw new Error("Недействительный токен");
   }
 };

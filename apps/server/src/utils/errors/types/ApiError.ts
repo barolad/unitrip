@@ -1,5 +1,5 @@
+import type { ErrorCode } from "./ErrorCode";
 import { HTTPException } from "hono/http-exception";
-import { ErrorCode } from "./ErrorCode";
 import { codeToStatus } from "../lib/codeToStatus";
 
 export class ApiError extends HTTPException {

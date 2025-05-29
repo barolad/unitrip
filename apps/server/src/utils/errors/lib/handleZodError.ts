@@ -1,5 +1,5 @@
-import { Context } from "hono";
-import { ZodError } from "zod";
+import type { Context } from "hono";
+import type { ZodError } from "zod";
 import { parseZodErrorIssues } from "./parseZodErrorIssues";
 
 export function handleZodError(

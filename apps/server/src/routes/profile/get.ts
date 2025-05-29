@@ -1,5 +1,5 @@
+import type { profileApi } from ".";
 import { createRoute } from "@hono/zod-openapi";
-import { profileApi } from ".";
 
 const getRoute = createRoute({
   tags: ["profile"],

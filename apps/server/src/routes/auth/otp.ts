@@ -1,5 +1,5 @@
-import { env } from "@/env";
 import { Redis } from "ioredis";
+import { env } from "@/env";
 
 const OTP_EXPIRY = 5 * 60; // 5 минут
 const MAX_ATTEMPTS = 3; // Максимальное количество попыток

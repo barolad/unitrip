@@ -1,6 +1,6 @@
+import type { authApi } from "../";
 import { createRoute, z } from "@hono/zod-openapi";
-import { authApi } from "../";
-import { verifyOtp, ERROR_MESSAGES } from "../otp";
+import { ERROR_MESSAGES, verifyOtp } from "../otp";
 import { generateTokens } from "./tokens";
 
 const verifyOtpSchema = z.object({
