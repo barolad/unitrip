@@ -38,7 +38,7 @@ const sendOtpRoute = createRoute({
 
 export function registerSendOtp(api: typeof authApi) {
   return api.openapi(sendOtpRoute, async (c) => {
-    const { email } = await c.req.json();
+    const { email } = c.req.valid("json");
 
     const isValid = await isOtpValid(email);
     if (isValid) {
@@ -52,4 +52,4 @@ export function registerSendOtp(api: typeof authApi) {
 
     return c.json(null, 200);
   });
-};
+}

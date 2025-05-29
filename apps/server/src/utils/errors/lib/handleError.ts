@@ -6,6 +6,7 @@ import { ApiError } from "../types/ApiError";
 import { parseZodErrorIssues } from "./parseZodErrorIssues";
 
 export function handleError(error: Error, c: Context) {
+  console.log(error);
   if (error instanceof ZodError) {
     return c.json(
       {
