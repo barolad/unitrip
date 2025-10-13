@@ -1,0 +1,21 @@
+{
+  "name": "unitrip",
+  "private": true,
+  "version": "0.0.1",
+  "scripts": {
+    "build": "turbo build",
+    "dev": "turbo dev",
+    "lint": "turbo lint",
+    "format": "prettier --write .",
+    "clean": "find . -type d \\( -name \"node_modules\" -o -name \"dist\" -o -name \".turbo\" \\) -exec rm -rf {} +"
+  },
+  "packageManager": "pnpm@9.0.0",
+  "engines": {
+    "node": ">=18"
+  },
+  "devDependencies": {
+    "prettier": "^3.6.2",
+    "turbo": "^2.5.8",
+    "typescript": "^5.9.3"
+  }
+}
