@@ -2,6 +2,7 @@
   "name": "@unitrip/db",
   "version": "0.0.1",
   "description": "",
+  "type": "module",
   "main": "src/index.ts",
   "scripts": {
     "generate": "drizzle-kit generate",
@@ -10,6 +11,7 @@
     "studio": "drizzle-kit studio"
   },
   "dependencies": {
+    "dotenv": "^17.2.3",
     "drizzle-orm": "^0.44.6",
     "drizzle-zod": "^0.8.3",
     "postgres": "^3.4.7",
