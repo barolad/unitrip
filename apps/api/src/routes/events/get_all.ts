@@ -6,6 +6,7 @@ import { EventSchema } from "./schema";
 export const getAllEventsRoute = createRoute({
   method: "get",
   path: "/",
+  tags: ["events"],
   responses: {
     200: {
       content: {

@@ -14,6 +14,6 @@ export const configureDocs = (app: OpenAPIHono) => {
     "/docs",
     Scalar({
       url: "/api/openapi",
-    })
+    }),
   );
 };
