@@ -1,5 +1,5 @@
 import type { OpenAPIHono } from "@hono/zod-openapi";
-import { apiReference, Scalar } from "@scalar/hono-api-reference";
+import { Scalar } from "@scalar/hono-api-reference";
 
 export const configureDocs = (app: OpenAPIHono) => {
   app.doc("/openapi", {
