@@ -5,8 +5,14 @@
   "version": "0.0.1",
   "exports": {
     "./hc": {
-      "default": "./dist/hc.cjs",
-      "types": "./dist/hc.d.cts"
+      "import": {
+        "types": "./dist/hc.d.ts",
+        "default": "./dist/hc.js"
+      },
+      "require": {
+        "types": "./dist/hc.d.cts",
+        "default": "./dist/hc.cjs"
+      }
     }
   },
   "scripts": {

@@ -1,8 +1,8 @@
 import { hc } from "hono/client";
-import { app } from ".";
+import type { App } from ".";
 
-const client = hc<typeof app>("");
+const client = hc<App>("");
 export type Client = typeof client;
 
 export const hcWithType = (...args: Parameters<typeof hc>): Client =>
-  hc<typeof app>(...args);
+  hc<App>(...args);

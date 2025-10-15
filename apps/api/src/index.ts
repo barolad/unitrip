@@ -9,6 +9,8 @@ export const app = new OpenAPIHono()
 
 configureDocs(app);
 
+export type App = typeof app;
+
 serve(
   {
     fetch: app.fetch,
