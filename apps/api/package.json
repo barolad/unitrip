@@ -3,6 +3,12 @@
   "type": "module",
   "private": true,
   "version": "0.0.1",
+  "exports": {
+    "./hc": {
+      "default": "./dist/hc.cjs",
+      "types": "./dist/hc.d.cts"
+    }
+  },
   "scripts": {
     "dev": "tsx watch src/index.ts",
     "build": "tsup",

@@ -1,13 +1,11 @@
 import { serve } from "@hono/node-server";
 import { OpenAPIHono } from "@hono/zod-openapi";
 import { configureDocs } from "@/lib/configureDocs";
-import { routes } from "./routes";
+import { eventsRouter } from "@/routes/events";
 
-const app = new OpenAPIHono().basePath("/api");
-
-routes.forEach((route) => {
-  app.route("/", route);
-});
+export const app = new OpenAPIHono()
+  .basePath("/api")
+  .route("/events", eventsRouter);
 
 configureDocs(app);
 
@@ -18,5 +16,5 @@ serve(
   },
   (info) => {
     console.log(`Server is running on http://localhost:${info.port}`);
-  },
+  }
 );

@@ -7,5 +7,5 @@ export default defineConfig({
   platform: "node",
   splitting: false,
   sourcemap: false,
-  entry: ["src/index.ts"],
+  entry: ["src/index.ts", "src/hc.ts"],
 });

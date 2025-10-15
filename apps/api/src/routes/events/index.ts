@@ -5,7 +5,6 @@ import { putEventRoute, putEventHandler } from "./put";
 import { getEventHandler, getEventRoute } from "./get";
 
 export const eventsRouter = createRouter()
-  .basePath("/events")
   .openapi(getAllEventsRoute, getAllEventsHandler)
   .openapi(getEventRoute, getEventHandler)
   .openapi(postEventRoute, postEventHandler)
