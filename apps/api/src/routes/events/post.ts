@@ -35,7 +35,7 @@ export const postEventRoute = createRoute({
 });
 
 export const postEventHandler: AppRouteHandler<typeof postEventRoute> = async (
-  c,
+  c
 ) => {
   const event = c.req.valid("json");
   const [_event] = await db.insert(events).values(event).returning();
