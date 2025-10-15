@@ -10,7 +10,7 @@ export const PaginationMetadataSchema = z.object({
 
 // Generic pagination response schema
 export const createPaginationResponseSchema = <T extends z.ZodTypeAny>(
-  dataSchema: T
+  dataSchema: T,
 ) =>
   z.object({
     data: z.array(dataSchema),

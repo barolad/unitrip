@@ -1,5 +1,5 @@
 {
-  "id": "21961513-35ff-44b9-9b49-bdbd4b2bb4cf",
+  "id": "77674190-ca15-4074-b777-5ff54dffb2aa",
   "prevId": "00000000-0000-0000-0000-000000000000",
   "version": "7",
   "dialect": "postgresql",
@@ -12,7 +12,8 @@
           "name": "id",
           "type": "uuid",
           "primaryKey": true,
-          "notNull": true
+          "notNull": true,
+          "default": "gen_random_uuid()"
         },
         "title": {
           "name": "title",
@@ -58,9 +59,10 @@
         },
         "difficulty": {
           "name": "difficulty",
-          "type": "numeric(1)",
+          "type": "smallint",
           "primaryKey": false,
-          "notNull": false
+          "notNull": true,
+          "default": 1
         },
         "is_paid": {
           "name": "is_paid",

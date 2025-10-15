@@ -99,6 +99,6 @@ export const getAllEventsHandler: AppRouteHandler<
         totalPages,
       },
     },
-    200
+    200,
   );
 };

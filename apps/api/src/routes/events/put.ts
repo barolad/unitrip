@@ -19,7 +19,7 @@ export const putEventRoute = createRoute({
             id: true,
             createdAt: true,
             updatedAt: true,
-          }),
+          }).partial(),
         },
       },
     },
@@ -40,11 +40,11 @@ export const putEventHandler: AppRouteHandler<typeof putEventRoute> = async (
   c,
 ) => {
   const { id } = c.req.valid("param");
-  const { name, description } = c.req.valid("json");
+  const payload = c.req.valid("json");
   const [_event] = await db
     .update(events)
-    .set({ name, description })
-    .where(eq(events.id, Number(id)))
+    .set(payload)
+    .where(eq(events.id, id))
     .returning();
 
   if (!_event) {

@@ -26,7 +26,7 @@ export const getEventRoute = createRoute({
 });
 
 export const getEventHandler: AppRouteHandler<typeof getEventRoute> = async (
-  c
+  c,
 ) => {
   const { id } = c.req.valid("param");
   const _event = await db.query.events.findFirst({

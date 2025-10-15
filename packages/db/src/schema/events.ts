@@ -9,7 +9,7 @@ import {
 } from "drizzle-orm/pg-core";
 
 export const events = pgTable("events", {
-  id: uuid("id").primaryKey().defaultRandom(),
+  id: uuid("id").defaultRandom().primaryKey(),
   title: varchar("title", { length: 255 }).notNull(),
   description: text("description").notNull(),
   imageUrl: varchar("image_url", { length: 500 }).array(),

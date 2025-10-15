@@ -2,13 +2,11 @@ import { createRoute } from "@hono/zod-openapi";
 import { EventSchema } from "./schema";
 import { db, events } from "@unitrip/db";
 import type { AppRouteHandler } from "@/lib/types";
-import { authMiddleware } from "@/middlewares";
 
 export const postEventRoute = createRoute({
   method: "post",
   path: "/",
   tags: ["events"],
-  middleware: [authMiddleware],
   request: {
     body: {
       content: {
@@ -35,7 +33,7 @@ export const postEventRoute = createRoute({
 });
 
 export const postEventHandler: AppRouteHandler<typeof postEventRoute> = async (
-  c
+  c,
 ) => {
   const event = c.req.valid("json");
   const [_event] = await db.insert(events).values(event).returning();
